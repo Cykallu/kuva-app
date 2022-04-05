@@ -35,6 +35,8 @@ const isDataValid = computed(() => {
 const createNewPublication = async () => {
     if (!isDataValid.value.isAllValid) return
     const { data, error } = await publicationService.usePost(publicationData)
+    //Tarkistetaan datan lähetys ja virheiden tarkistus
+    //Jos kaikki OK niin tyhjennetään kentät
     if (data.value && !error.value) {
         publicationData.title = ''
         publicationData.description = ''
