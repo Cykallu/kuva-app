@@ -1,6 +1,7 @@
 <script>
 import { computed, reactive, unref } from 'vue';
 import { publicationService } from '../../services/publicationService';
+import { router } from '../../router'
 
 //julkaisun datan määritys
 const publicationData = reactive({
@@ -41,6 +42,7 @@ const createNewPublication = async () => {
         publicationData.title = ''
         publicationData.description = ''
         publicationData.url = ''
+        router.push({ path: "/" })
     }
 }
 
