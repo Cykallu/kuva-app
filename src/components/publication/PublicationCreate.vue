@@ -55,6 +55,10 @@ const createNewPublication = async () => {
     height: 200px;
     justify-content: space-between;
     width: 200px;
+    color: white;
+    padding: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: large;
 }
 .button:active{
     background-color: green;

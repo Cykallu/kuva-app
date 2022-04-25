@@ -26,8 +26,12 @@ const { data, error, isFinished } = publicationService.useGetAll()
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgb(231, 231, 231);
+    background: rgb(41, 41, 41);
     margin: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    border-radius: 3px;
+    
 }
 .container {
     display: flex;

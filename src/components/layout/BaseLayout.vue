@@ -3,7 +3,7 @@ import NavigationBar from '../navigation/NavigationBar.vue';
 </script>
 
 <template>
-    <div>
+    <div class="nav-bar">
         <NavigationBar></NavigationBar>
     </div>
     <div class="container center">
@@ -21,5 +21,7 @@ import NavigationBar from '../navigation/NavigationBar.vue';
     margin-top: 80px;
     align-items: center;
     justify-content: center;
+    background-color: black;
 }
+
 </style>
