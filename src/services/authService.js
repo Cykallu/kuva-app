@@ -6,7 +6,7 @@ export const authService = {
         const { data, error } = await useApi('/login').post(payload).json()
 
         if (data.value && !error.value) {
-            globalState.accessToken = data.value.access_token
+            globalState.value.accessToken = data.value.access_token
         }
     },
 
@@ -16,7 +16,7 @@ export const authService = {
 
         const { error } = await useApi('/logout').post()
         if (!error.value) {
-            globalState.accessToken = null
+            globalState.value.accessToken = null
         }
     }
 }

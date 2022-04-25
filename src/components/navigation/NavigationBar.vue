@@ -13,7 +13,7 @@ provide('showLoginView', showLoginView)
     <div class="nav">
         <router-link to="/">Koti</router-link>
         <router-link to="/create">Uusi</router-link>
-        <router-link to="/users">Käyttäjät</router-link>
+        <router-link v-if="isAuth" to="/users">Käyttäjät</router-link>
         <a href="#" v-if="!isAuth" @click="showLoginView = !showLoginView">Kirjaudu</a>
         <a href="#" @click="authService.useLogout()" v-else>Ulos</a>
     </div>

@@ -1,9 +1,15 @@
 <script setup>
-import PublicationView from './PublicationView.vue';
+import UsersView from './UsersView.vue';
 import { useRouter } from 'vue-router';
-import { publicationService } from '../../services/publicationService';
+import { userService } from '../../services/userService';
+
 const router = useRouter()
 const { data, error, isFinished } = publicationService.useGetAll()
+watch(isAuth,()=>{
+    if (isAuth.value){
+
+        router.push('/')
+    }
 </script>
 
 <template>
@@ -11,11 +17,11 @@ const { data, error, isFinished } = publicationService.useGetAll()
     <div v-else-if="!isFinished">Ladataan...</div>
     <template v-else>
         <div
-            @click="router.push('/publication/' + publication._id)"
+            @click="router.push('/users/' + user._id)"
             class="item"
-            v-for="publication in data.publications"
+            v-for="user in data.users"
         >
-            <PublicationView :publication="publication"></PublicationView>
+            <UsersView :user="user"></UsersView>
         </div>
     </template>
     
