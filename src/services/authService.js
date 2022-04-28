@@ -18,5 +18,10 @@ export const authService = {
         if (!error.value) {
             globalState.value.accessToken = null
         }
+    },
+    
+    async useRegister(payload){
+        return useApi('/register').post(payload).json()
     }
+
 }
