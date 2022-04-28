@@ -2,6 +2,8 @@
 import { onClickOutside } from '@vueuse/core';
 import { inject, reactive, ref } from 'vue';
 import { authService } from '../../services/authService';
+import { RouterLink } from 'vue-router'
+
 const showLoginView = inject('showLoginView')
 const credentials = reactive({
     username: '',
@@ -15,7 +17,7 @@ onClickOutside(target, () => {
 
 <template>
     <div class="overlay">
- 
+        
 
             <form ref="target" class="login" @submit.prevent="authService.useLogin(credentials)">
 
@@ -27,7 +29,9 @@ onClickOutside(target, () => {
                 <input v-model="credentials.password" type="password">
 
                 <button type="submit">Kirjaudu</button>
-            
+                <router-link to="/register" @click="showLoginView=false">Rekisteröidy</router-link>
+
+                
             </form>
 
 
@@ -65,7 +69,7 @@ label {
     flex: 6;
 }
 button {
-    width: 150px;
+    width: 220px;
     height: 50px;
     border: none;
     outline: none;
@@ -82,6 +86,7 @@ button {
     font-size: large;
     margin-right: 1px;
     box-sizing: content-box;
+    
 }
 
 
