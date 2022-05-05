@@ -1,10 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PublicationViewAll from './components/publication/PublicationViewAll.vue'
-import UsersView from './components/user/UsersView.vue'
+import UsersViewAll from './components/user/UsersViewAll.vue'
+import UserViewDetails from './components/user/UserViewDetails.vue'
 import PublicationCreate from './components/publication/PublicationCreate.vue'
 import PublicationViewDetails from './components/publication/PublicationViewDetails.vue'
 import RegisterForm from './components/login/RegisterForm.vue'
-export const router = createRouter({
+import AccountViewDetails from './components/account/AccountViewDetails.vue'
+
+import { isAuth } from './store'
+
+const router = createRouter({
     history: createWebHistory(),
     routes: [{
             path: '/',
@@ -14,7 +19,13 @@ export const router = createRouter({
         {
             path: '/users',
             name: 'Käyttäjät',
-            component: UsersView
+            component: UsersViewAll
+        },
+        {
+            path:'/users/:userId',
+            props: true,
+            name:'Yksittäinen käyttäjä',
+            component: UserViewDetails
         },
         {
             path: '/create',
@@ -31,6 +42,21 @@ export const router = createRouter({
             path: '/register',
             name: 'Rekisteröidy',
             component: RegisterForm
+        },
+        {
+            path:'/account',
+            name:'Oma tili',
+            component: AccountViewDetails
         }
     ]
 })
+
+router.beforeEach((to,from,next)=>{
+    if(to.path == '/users' && !isAuth.value){
+    next('/')
+    } else {
+        next()
+    }
+})
+
+export {router}
