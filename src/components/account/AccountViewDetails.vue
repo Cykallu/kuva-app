@@ -1,44 +1,43 @@
 <script setup>
-import PublicationView from './PublicationView.vue';
+import {accountService} from '../../services/accountService'
+import AccountView from './AccountView.vue';
+import { isAuth } from '../../store';
 import { useRouter } from 'vue-router';
-import { publicationService } from '../../services/publicationService';
+import { watch } from 'vue';
+
 const router = useRouter()
-const { data, error, isFinished } = publicationService.useGetAll()
+watch(isAuth,()=>{
+    if (isAuth.value = null){
+        router.push('/')
+    }
+})
+
+const props = defineProps({
+    accountId:String
+})
+const { data, error, isFinished } = accountService.useGetAccount(props.accountId)
+
+
 </script>
 
 <template>
-    <div v-if="error">Valitettavasti postauksia ei ollut juuri nyt saatavilla</div>
+    <div v-if="error">Tapahtui virhe</div>
     <div class="spinner" v-else-if="!isFinished">Ladataan...</div>
-    <template v-else>
-        <div
-            @click="router.push('/publication/' + publication._id)"
-            class="item"
-            v-for="publication in data.publications"
-        >
-            <PublicationView :publication="publication"></PublicationView>
+    <div v-else-if="data?.account">
+        <div class="center">
+            <AccountView :account="data.account"></AccountView>
+            
         </div>
-    </template>
-    
+    </div>
 </template>
 
 <style scoped>
-.item {
+.center {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgb(49, 49, 49);
-    margin: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    text-align: center;
-    border-radius: 3px;
-    
+    justify-content: center;
 }
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .spinner {
     position: relative;
     width: 80px;
@@ -73,4 +72,5 @@ const { data, error, isFinished } = publicationService.useGetAll()
       transform: rotate(360deg);
     }
   }
+
 </style>

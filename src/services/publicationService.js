@@ -12,6 +12,10 @@ export const publicationService = {
 
     usePost(payload) {
         return useApi('/publications').post(payload).json()
+    },
+
+    getComments() {
+        return useApi(`/publications/${publicationId}/comments`).json()
     }
 
 }

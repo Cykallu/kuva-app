@@ -7,5 +7,9 @@ export const userService = {
     
     useGetAll() {
         return useApi('/users').json()
+    },
+
+    useGetAccount(){
+        return useApi('/account').json()
     }
 }

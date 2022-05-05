@@ -55,6 +55,7 @@ onClickOutside(target, () => {
     color: white;
     border-radius: 25px;
     
+    
 }
 input {
     margin-bottom: 10px;
@@ -86,6 +87,7 @@ button {
     font-size: large;
     margin-right: 1px;
     box-sizing: content-box;
+    margin-bottom: 10px;
     
 }
 

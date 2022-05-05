@@ -1,19 +1,29 @@
 <script setup>
+import { RouterLink } from 'vue-router';
+
+
 defineProps({
-    user: Object
+    account: Object
 })
 </script>
+
 <template>
-    <h1>{{  user.username }}</h1>
-    <img :src="user.profile_picture" />
+    
+        <img :src="account.profile_picture" />
+        <h1>{{account.username}}</h1>
+        <p>{{account.email}}</p>
+        <router-link to="/account/password">Vaihda salasanasi</router-link>
 </template>
 
-
 <style scoped>
-img{
-    width: 150px;
-    height: 150px;
+
+img {
+    width: 200px;
+    height: 200px;
     margin: 20px;
+    border: 2px;
+    border-style: dashed;
+    border-color: white;
 }
 h1{
     color: white;
@@ -25,4 +35,5 @@ p{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 }
+
 </style>

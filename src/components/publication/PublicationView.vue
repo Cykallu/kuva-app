@@ -8,6 +8,7 @@ defineProps({
     <h1>{{  publication.title }}</h1>
     <img :src="publication.url" />
     <p>{{ publication.owner ? publication.owner.username : 'Anonymous' }}</p>
+    
 </template>
 
 <style>

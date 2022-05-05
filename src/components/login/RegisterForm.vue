@@ -1,7 +1,7 @@
 <script setup>
 import { computed, reactive, ref } from 'vue';
 import { authService } from '../../services/authService';
-
+import { RouterLink } from 'vue-router'
 
 
 const RegisterData = reactive({
@@ -15,8 +15,8 @@ const regSucc = ref(false)
 
 const isRegisterDataValid= computed(() => {
     const passwordValidation = RegisterData.password.length < 1000 && RegisterData.password.length > 6
-    const emailValidation = RegisterData.email.includes('@')
-    const passwordMatchValidation = RegisterData.password == confirmPassword
+    const emailValidation = RegisterData.email.includes('@') && RegisterData.email.includes('.')
+    const passwordMatchValidation = RegisterData.password == confirmPassword.value
     const usernameValidation = RegisterData.username.length < 20 && RegisterData.username.length > 3
     return {
         passwordValidation: passwordValidation ? 'OK' : 'Salasana oltava 6 - 1000 merkkiä pitkä',
@@ -38,7 +38,9 @@ const register = async () => {
 
 <template>
 <div class="register_form">
-    <div v-if="regSucc">Rekisteröityminen onnistui</div>
+    <div v-if="regSucc">Rekisteröityminen onnistui! Voit nyt kirjautua sisään</div>
+    <div v-if="regSucc"><router-link to="/"> Etusivulle</router-link>
+</div>
     <form class="register_form" v-else @submit.prevent="register">
         
         <label>Sähköposti</label>

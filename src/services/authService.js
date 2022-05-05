@@ -1,4 +1,6 @@
+import { set } from "@vueuse/core/node_modules/vue-demi"
 import { useApi } from "../composables/api"
+import { setError, setSucc } from "../composables/Notifications"
 import { globalState } from "../store"
 
 export const authService = {
@@ -6,6 +8,7 @@ export const authService = {
         const { data, error } = await useApi('/login').post(payload).json()
 
         if (data.value && !error.value) {
+            setSucc("Kirjautuminen onnistui")
             globalState.value.accessToken = data.value.access_token
         }
     },
@@ -15,9 +18,13 @@ export const authService = {
         // 200 vastaukseksi joten .json() metodia ei käytetä.
 
         const { error } = await useApi('/logout').post()
-        if (!error.value) {
-            globalState.value.accessToken = null
+        if (error.value) {
+            setError("Virhe")
         }
+        
+            globalState.value.accessToken = null
+            setSucc("Sinut on kirjattu ulos")
+        
     },
     
     async useRegister(payload){

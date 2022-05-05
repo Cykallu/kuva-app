@@ -1,33 +1,32 @@
 <script setup>
-import { publicationService } from '../../services/publicationService';
-import PublicationView from './PublicationView.vue';
-const props = defineProps({
-    publicationId: String
-})
-const { data, error, isFinished } = publicationService.useGetById(props.publicationId)
-</script>
+import { userService } from '../../services/userService';
+import UsersView from './UsersView.vue';
 
+const props = defineProps({
+    userId: String
+})
+
+const {data,error,isFinished} = userService.useGetById(props.userId)
+</script>
 
 <template>
     <div v-if="error">Tapahtui virhe</div>
     <div class="spinner" v-else-if="!isFinished">Ladataan...</div>
-    <div v-else-if="data?.publication">
-        <div class="center">
-            <PublicationView :publication="data.publication"></PublicationView>
-            
+    <div v-else-if="data?.user">
+        <div class="user">
+           <UsersView :user="data.user"></UsersView>
+        
         </div>
     </div>
 </template>
 
-
 <style scoped>
-.center {
+.user {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
 .spinner {
     position: relative;
     width: 80px;
@@ -62,4 +61,5 @@ const { data, error, isFinished } = publicationService.useGetById(props.publicat
       transform: rotate(360deg);
     }
   }
+
 </style>
